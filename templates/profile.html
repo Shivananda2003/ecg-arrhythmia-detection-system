@@ -1,0 +1,147 @@
+{% extends 'user.html' %}
+
+{% block account_content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-4">
+                    <!-- Profile Header -->
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center" style="width:70px; height:70px; font-size:28px;">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h3 class="mb-0">{{ name }}</h3>
+                            <small class="text-muted">{{ email }}</small>
+                        </div>
+                    </div>
+
+                    <!-- Profile Details -->
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="card bg-light shadow-sm rounded-3 p-3 h-100">
+                                <h6 class="text-muted"><i class="fas fa-birthday-cake me-2"></i> Age</h6>
+                                <p class="fs-5 mb-0">{{ age }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card bg-light shadow-sm rounded-3 p-3 h-100">
+                                <h6 class="text-muted"><i class="fas fa-venus-mars me-2"></i> Gender</h6>
+                                <p class="fs-5 mb-0">{{ gender }}</p>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="card bg-light shadow-sm rounded-3 p-3 h-100">
+                                <h6 class="text-muted"><i class="fas fa-notes-medical me-2"></i> Medical History</h6>
+                                <p class="fs-5 mb-0">{{ medical_history if medical_history else 'N/A' }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 🔥 ECG HISTORY SECTION -->
+                    <div class="mt-4">
+                        <h4 class="mb-3">📊 ECG Analysis History</h4>
+                        <div id="historyContainer"></div>
+
+                        <!-- ✅ UPDATED BUTTON -->
+                        <button id="loadMoreBtn" onclick="loadHistory()" class="btn btn-outline-primary mt-2">
+                            Load More
+                        </button>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-start mt-4">
+                        <a href="{{ url_for('edit_profile') }}" class="btn btn-primary me-2">
+                            <i class="fas fa-edit me-1"></i> Edit Profile
+                        </a>
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-success">
+                            <i class="fas fa-chart-line me-1"></i> View Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<script>
+const labelMap = {
+    0: "Normal ❤️",
+    1: "Supraventricular ⚠️",
+    2: "Ventricular (PVC) 🚨",
+    3: "Fusion ⚠️",
+    4: "Unknown ❓"
+};
+
+let page = 1;
+
+async function loadHistory() {
+    let res = await fetch(`/api/my_reports?page=${page}`);
+    let data = await res.json();
+
+    const container = document.getElementById("historyContainer");
+    const loadBtn = document.getElementById("loadMoreBtn");
+
+    if (!data || data.length === 0) {
+        if (page === 1) {
+            container.innerHTML = "<p class='text-muted'>No ECG history available</p>";
+        }
+        loadBtn.style.display = "none";
+        return;
+    }
+
+    container.innerHTML += data.map(r => {
+        let color = "success";
+        if (r.risk_level === "MODERATE") color = "warning";
+        if (r.risk_level === "HIGH") color = "danger";
+
+        return `
+            <div class="card shadow-sm mb-3 border-${color}">
+                <div class="card-body">
+                    <h5>${labelMap[r.pred_class]}</h5>
+
+                    <p><strong>Risk:</strong> 
+                        <span class="text-${color}">${r.risk_level}</span>
+                    </p>
+
+                    <p><strong>Confidence:</strong> 
+                        ${parseFloat(r.confidence).toFixed(3)}
+                    </p>
+
+                    <p><strong>Heart Rate:</strong> 
+                        ${r.heart_rate ? r.heart_rate.toFixed(1) + " bpm" : "N/A"}
+                    </p>
+
+                    <p><strong>File:</strong> ${r.file_type}</p>
+
+                    <small class="text-muted">${r.created_at}</small>
+
+                    <br>
+
+                    <!-- 🔥 DOWNLOAD BUTTON -->
+                    <a href="/download/report/${r.id}" 
+                       class="btn btn-sm btn-dark mt-2">
+                        Download PDF
+                    </a>
+                </div>
+            </div>
+        `;
+    }).join("");
+
+    page++;
+
+    // ✅ HIDE BUTTON WHEN NO MORE DATA
+    if (data.length < 2) {
+        loadBtn.style.display = "none";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", loadHistory);
+</script>
+{% endblock %}

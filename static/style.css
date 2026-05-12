@@ -1,0 +1,323 @@
+/* General body */
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: rgb(221, 248, 255) !important;
+}
+
+/* Content wrapper grows to push footer down */
+.content-wrapper {
+    flex: 1;
+}
+
+/* Non-home pages: add padding to prevent navbar overlap */
+body.with-navbar-padding .content-wrapper {
+    padding-top: 70px;
+}
+
+/* Images */
+img {
+    height: 25px;
+    width: 30px;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    padding: 10px 1rem;
+    z-index: 2000;
+    transition: background-color 0.3s ease-in-out;
+    background-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Home page: transparent at start */
+/* body.home-page .navbar {
+    background-color: transparent !important;
+} */
+
+/* Home page: hover effect */
+body.home-page .navbar:hover {
+    background-color: rgba(255, 255, 255, 1.0) !important;
+}
+
+/* Home page: solid on scroll */
+body.home-page .navbar.scrolled {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(5px);
+}
+
+/* Non-home pages: solid immediately */
+body.with-navbar-padding .navbar {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(5px);
+}
+
+/* Links & icons */
+.navbar .nav-link,
+.navbar .fa-user {
+    transition: color 0.3s ease-in-out;
+    padding: 20px !important;
+    font-size: 20px;
+}
+
+.navbar .fa-user { 
+    font-size: 25px; 
+}
+
+/* Home page default color */
+body.home-page .navbar .nav-link,
+body.home-page .navbar .fa-user {
+    color: rgb(0, 0, 0) !important;
+}
+
+/* Non-home page default color */
+body.with-navbar-padding .navbar .nav-link,
+body.with-navbar-padding .navbar .fa-user {
+    color: black !important;
+}
+
+/* Hover effects for links and icon - works on all pages and even active links */
+.navbar .nav-link:hover,
+.navbar .nav-link.active:hover,
+.navbar .fa-user:hover,
+body.home-page .navbar .nav-link:hover,
+body.home-page .navbar .fa-user:hover,
+body.with-navbar-padding .navbar .nav-link:hover,
+body.with-navbar-padding .navbar .fa-user:hover {
+    color: #0d6efd !important;
+}
+
+/* Footer styles (sticky footer) */
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links, .f-info-socials, .f-info-brand {
+    font-size: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i {
+    font-size: 20px;
+    margin-right: 1rem;
+}
+
+.f-info {
+    text-align: center;
+    height: 128px;
+    background-color: #ffffff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+    margin-top: auto; /* sticky footer */
+}
+
+/* Video section full screen */
+.video-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Video background */
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures video fills area without stretching */
+    z-index: -1; /* behind navbar and content */
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+    margin: 0 auto;
+}
+
+/* Sidebar */
+#sidebar {
+    position: fixed;
+    top: 70px; /* height of navbar */
+    left: -250px; /* hidden by default */
+    width: 250px;
+    height: calc(100% - 70px);
+    transition: left 0.3s;
+    z-index: 1500;
+}
+
+#sidebar.active {
+    left: 0;
+}
+
+/* Main content */
+.main-content {
+    flex: 1;
+    margin-left: 0;
+    transition: margin-left 0.3s;
+    padding: 20px;
+}
+
+.main-content.shifted {
+    margin-left: 250px; /* only for larger screens */
+}
+
+/* Hamburger button */
+#menu-btn {
+    position: fixed;
+    top: 10px;
+    left: 15px;
+    z-index: 2000; /* above navbar and sidebar */
+    font-size: 24px;
+    background: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#menu-btn i {
+    color: black;
+}
+
+/* Overlay */
+#overlay {
+    display: none;
+    position: fixed;
+    top: 56px; /* below navbar */
+    left: 0;
+    width: 100%;
+    height: calc(100% - 56px);
+    background: rgba(0,0,0,0.5);
+    z-index: 1400;
+}
+
+#overlay.active {
+    display: block;
+}
+
+/* Sidebar links */
+.sidebar-link {
+    color: white;
+    text-decoration: none;
+}
+
+.sidebar-link:hover {
+    color: #000000;
+    background-color: #0d6efd;
+}
+
+
+
+/* home page cards links */
+
+
+ .custom-card {
+        width: 250px;
+        transition: all 0.4s ease;
+        border-radius: 20px;
+        overflow: hidden;
+
+        /* Glassmorphism */
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    }
+
+    .custom-card img {
+        height: 160px;
+        object-fit: cover;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .custom-card .card-body {
+        color: #fff;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    }
+
+    .custom-card:hover {
+        opacity: 0.8; /* Fade effect */
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+
+    .overlay-content {
+        background: rgba(0, 0, 0, 0.35); /* semi-transparent dark */
+        padding: 20px;
+        border-radius: 20px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    /* Horizontal scrolling on small screens */
+    .cards-container {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+
+    .cards-container::-webkit-scrollbar {
+        height: 6px;
+    }
+    .cards-container::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.5);
+        border-radius: 5px;
+    }
+
+
+
+ /* Alternative card style for other pages */
+  .custom-card {
+    width: 250px;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+  .custom-card img {
+    height: 160px;
+    object-fit: cover;
+  }
+  .custom-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+  }
+  .custom-card .card-body {
+    background: #fff; /* Ensure text is visible */
+    color: #000;
+  }
+
+#cardCarousel .custom-card {
+  flex: 1 1 300px;
+  max-width: 320px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#cardCarousel .custom-card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+
+

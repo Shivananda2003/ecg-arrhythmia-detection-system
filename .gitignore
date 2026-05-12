@@ -1,0 +1,35 @@
+# Virtual Environment
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+
+# Logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Dataset files
+mitbih_dataset/
+
+# Large ML/Data files
+*.npy
+*.pth
+*.pt
+
+# Temporary files
+temp/
+tmp/

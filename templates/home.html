@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Full-screen video hero section -->
+<div class="video-section position-relative">
+    <video autoplay muted loop playsinline class="w-100" style="height: 100vh; object-fit: cover;">
+        <source src="{{ url_for('static', filename='videos/project.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Clean Overlay content -->
+    <div class="overlay-content position-absolute top-50 start-50 translate-middle text-center text-white w-100 px-3">
+        <h1 class="display-4 fw-bold mb-4">Welcome to Arrhythmia Detector</h1>
+        <p class="lead mb-5">Learn, Prevent, and Manage Heart Diseases Effectively</p>
+        <a href="{{ url_for('user') if current_user else url_for('signup')}}" class="btn btn-danger btn-lg me-2">Get Started</a>
+        <a href="#services" class="btn btn-light btn-lg">Explore Services</a>
+    </div>
+</div>
+
+<!-- Our Services -->
+<section id="services" class="py-5 bg-light text-center">
+    <div class="container">
+        <h2 class="mb-4">Our Services</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card p-4 shadow-sm">
+                    <h5>🫀 Heart Checkups</h5>
+                    <p>Regular screenings to detect and prevent heart problems early.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-4 shadow-sm">
+                    <h5>💊 Treatments</h5>
+                    <p>Advanced medications and therapies for every patient’s needs.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-4 shadow-sm">
+                    <h5>👨‍⚕️ Specialists</h5>
+                    <p>Dedicated cardiologists with years of proven experience.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Us -->
+<section class="py-5">
+    <div class="container text-center">
+        <h2 class="mb-4">About Us</h2>
+        <p class="lead">Heart Health System is committed to providing advanced cardiac care with compassion and expertise.</p>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <h3>10,000+</h3>
+                <p>Patients Treated</p>
+            </div>
+            <div class="col-md-4">
+                <h3>50+</h3>
+                <p>Expert Doctors</p>
+            </div>
+            <div class="col-md-4">
+                <h3>24/7</h3>
+                <p>Emergency Support</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-5 bg-light">
+    <div class="container text-center">
+        <h2 class="mb-4">What Our Patients Say</h2>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card p-4 shadow-sm">
+                    <p>"The doctors here saved my life. Truly grateful!"</p>
+                    <h6>- Ramesh, 52</h6>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-4 shadow-sm">
+                    <p>"Friendly staff and world-class treatment. Highly recommend."</p>
+                    <h6>- Priya, 38</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Overlay Cards Carousel -->
+<section class="py-5">
+  <div class="container text-center">
+    <h2 class="mb-4">Learn More About Heart Health</h2>
+
+    <div id="cardCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+
+        <!-- First slide -->
+        <div class="carousel-item active">
+          <div class="d-flex justify-content-center gap-4 flex-wrap">
+            <!-- Card 1 -->
+            <div class="card custom-card shadow-sm">
+              <img src="{{ url_for('static', filename='images/heart_diseases.jpg') }}" class="card-img-top" alt="Heart Diseases">
+              <div class="card-body">
+                <h5 class="card-title">Common Heart Diseases</h5>
+                <p>Hypertension, CAD, Heart Attack, Arrhythmias...</p>
+              </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="card custom-card shadow-sm">
+              <img src="{{ url_for('static', filename='images/heart_symptoms.jpg') }}" class="card-img-top" alt="Heart Symptoms">
+              <div class="card-body">
+                <h5 class="card-title">Symptoms</h5>
+                <p>Chest pain, breathlessness, palpitations...</p>
+              </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="card custom-card shadow-sm">
+              <img src="{{ url_for('static', filename='images/healthy_diet.jpg') }}" class="card-img-top" alt="Healthy Diet">
+              <div class="card-body">
+                <h5 class="card-title">Healthy Diet</h5>
+                <p>Avoid Junk food, Eat fruits, veggies, whole grains...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second slide -->
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center gap-4 flex-wrap">
+            <!-- Card 4 -->
+            <div class="card custom-card shadow-sm">
+              <img src="{{ url_for('static', filename='images/exercise.jpg') }}" class="card-img-top" alt="Exercise">
+              <div class="card-body">
+                <h5 class="card-title">Exercise</h5>
+                <p>At least 30 min daily walk, cycling, or yoga.</p>
+              </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="card custom-card shadow-sm">
+              <img src="{{ url_for('static', filename='images/checkup.jpg') }}" class="card-img-top" alt="Checkups">
+              <div class="card-body">
+                <h5 class="card-title">Regular Checkups</h5>
+                <p>Monitor BP, cholesterol, and heart health.</p>
+              </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="card custom-card shadow-sm">
+              <img src="{{ url_for('static', filename='images/medication.jpg') }}" class="card-img-top" alt="Medication">
+              <div class="card-body">
+                <h5 class="card-title">Medications</h5>
+                <p>Doctors may prescribe BP and cholesterol meds.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Third slide -->
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center gap-4 flex-wrap">
+            <!-- Card 7 -->
+            <div class="card custom-card shadow-sm">
+              <img src="{{ url_for('static', filename='images/surgery.jpg') }}" class="card-img-top" alt="Surgery">
+              <div class="card-body">
+                <h5 class="card-title">Surgery</h5>
+                <p>Angioplasty, stents, or bypass may be needed.</p>
+              </div>
+            </div>
+            <!-- Card 8 -->
+            <div class="card custom-card shadow-sm">
+              <img src="{{ url_for('static', filename='images/stress.jpg') }}" class="card-img-top" alt="Stress Management">
+              <div class="card-body">
+                <h5 class="card-title">Stress Management</h5>
+                <p>Relaxation, meditation, and good sleep protect the heart.</p>
+              </div>
+            </div>
+            <!-- Card 9 -->
+            <div class="card custom-card shadow-sm">
+              <img src="{{ url_for('static', filename='images/smoking.jpg') }}" class="card-img-top" alt="Avoid Smoking">
+              <div class="card-body">
+                <h5 class="card-title">Avoid Smoking</h5>
+                <p>Quitting smoking reduces risk of heart attack and stroke.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Carousel controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

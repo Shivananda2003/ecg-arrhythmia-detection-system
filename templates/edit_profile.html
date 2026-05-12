@@ -1,0 +1,95 @@
+{% extends 'user.html' %}
+
+{% block account_content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-4">
+                    <h3 class="mb-4"><i class="fas fa-edit me-2"></i>Edit Profile</h3>
+
+                    <form method="POST" action="{{ url_for('edit_profile') }}">
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" name="name" value="{{ name }}" class="form-control" required>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" value="{{ email }}" class="form-control" required>
+                        </div>
+
+                        <!-- Age -->
+                        <div class="mb-3">
+                            <label class="form-label">Age</label>
+                            <input type="number" name="age" value="{{ age }}" class="form-control" required>
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="mb-3">
+                            <label class="form-label">Gender</label>
+                            <select name="gender" class="form-select">
+                                <option value="Male" {% if gender == "Male" %}selected{% endif %}>Male</option>
+                                <option value="Female" {% if gender == "Female" %}selected{% endif %}>Female</option>
+                                <option value="Other" {% if gender == "Other" %}selected{% endif %}>Other</option>
+                            </select>
+                        </div>
+
+                        <!-- Medical History (Heart Conditions) -->
+                        <div class="mb-3">
+                            <label class="form-label">Heart-Related Medical History</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="medical_history" value="Hypertension"
+                                        {% if 'Hypertension' in medical_history %}checked{% endif %}>
+                                        <label class="form-check-label">Hypertension (High BP)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="medical_history" value="Arrhythmia"
+                                        {% if 'Arrhythmia' in medical_history %}checked{% endif %}>
+                                        <label class="form-check-label">Arrhythmia</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="medical_history" value="Heart Attack"
+                                        {% if 'Heart Attack' in medical_history %}checked{% endif %}>
+                                        <label class="form-check-label">Heart Attack</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="medical_history" value="Angina"
+                                        {% if 'Angina' in medical_history %}checked{% endif %}>
+                                        <label class="form-check-label">Angina</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="medical_history" value="Heart Failure"
+                                        {% if 'Heart Failure' in medical_history %}checked{% endif %}>
+                                        <label class="form-check-label">Heart Failure</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="medical_history" value="Coronary Artery Disease"
+                                        {% if 'Coronary Artery Disease' in medical_history %}checked{% endif %}>
+                                        <label class="form-check-label">Coronary Artery Disease</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-start">
+                            <button type="submit" class="btn btn-primary me-2">Save Changes</button>
+                            <a href="{{ url_for('profile') }}" class="btn btn-secondary me-2">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+{% endblock %}

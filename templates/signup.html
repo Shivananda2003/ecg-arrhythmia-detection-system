@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<!-- Signup Page -->
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center">
+  <div class="row justify-content-center w-100">
+    <div class="col-md-6 col-lg-6">
+      
+      <!-- Card -->
+      <div class="card shadow p-4 border-0 rounded-3" style="background-color: #f9fdfc;">
+        
+        <!-- Heading -->
+        <h2 class="text-center mb-4 fw-bold text-primary">Create Your Account</h2>
+        <p class="text-center text-muted mb-4">Join us to access medical insights & personalized disease diagnosis</p>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <!-- Signup Form -->
+        <form method="POST">
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Enter your full name" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email Address</label>
+            <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" placeholder="Create a strong password" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" name="confirm_password" class="form-control" placeholder="Re-enter password" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Age</label>
+            <input type="number" name="age" class="form-control" placeholder="Enter your age" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <select class="form-select" name="gender" required>
+              <option value="" selected disabled>Select gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Medical History (Optional)</label>
+            <textarea class="form-control" name="medical_history" rows="3" placeholder="Any previous conditions, allergies, etc."></textarea>
+          </div>
+
+          <!-- Terms -->
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="terms" required>
+            <label class="form-check-label" for="terms">
+              I agree to the <a href="#" class="text-decoration-none text-primary">terms & conditions</a>
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="text-center mt-4">
+            <button class="btn btn-success w-100 fw-semibold" type="submit" style="font-size: 18px;">
+              Sign Up
+            </button>
+          </div>
+        </form>
+
+        <!-- Login Redirect -->
+        <p class="text-center mt-4 mb-0">
+          Already have an account? 
+          <a href="{{ url_for('login') }}" class="text-decoration-none fw-semibold text-primary">
+            Login here
+          </a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+<br>
+
+{% endblock %}
